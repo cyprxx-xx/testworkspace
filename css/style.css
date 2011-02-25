@@ -1,1 +1,35 @@
-* { color:red; }
+* { border:none; }
+
+
+#scroller {
+	width:500px;
+	float:left;
+}
+
+
+#wrap {
+	width:335px;
+	white-space:nowrap;
+	overflow:hidden;
+	float:left;
+	margin-left:55px;
+}
+
+#wrap img {
+	margin:0 10px;
+}
+
+#left, #right {
+	background:#ddd;
+	color:black;
+	padding:2px 5px;
+	cursor:pointer;
+}
+
+#left {
+	float:left;
+}
+
+#right {
+	float:right;
+}
