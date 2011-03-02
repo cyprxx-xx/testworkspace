@@ -3,6 +3,7 @@ document.observe('dom:loaded', init);
 function init() {
 	// Slider init
 	var slide = new Slider('scroller', 'left', 'right', 'linear');
+	//slide.wurstbrot();
 }
 
 
@@ -21,7 +22,12 @@ var Slider = Class.create({
 		// left and right button observe
 		$(left).observe('click', this.getData);
 		$(right).observe('click', this.getData);
+		
+		this.wurstbrot();
 	},
+	wurstbrot:function() {
+		alert('test');
+	},	
 	getData: function() {
 		var id = this.id;
 		var fullWidth = null;
@@ -42,10 +48,7 @@ var Slider = Class.create({
 		
 		// check for position of div, if end is reached: clone div and add it for endless scrolling
 		new Effect.Move(divToMove, { x:direction });
-		this.wurstbrot;
-	},
-	wurstbrot:function() {
-		alert('test');
-	}	
+		//this.wurstbrot();
+	}
 });
 
