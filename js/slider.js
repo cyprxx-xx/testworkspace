@@ -6,10 +6,6 @@ function init() {
 }
 
 
-
-
-
-
 /*
  * Slider-Class
  * Last-Upadte: 2011-02-25
@@ -22,18 +18,31 @@ var Slider = Class.create({
 		this.right = right;
 		this.transition = transition;
 		
-		this.eventHandler(left, right);
-	},
-	eventHandler:function(left, right) {
+		// left and right button observe
 		$(left).observe('click', this.getData);
 		$(right).observe('click', this.getData);
 	},
-	getData:function() {
+	getData: function() {
 		var id = this.id;
-		console.debug(id);
+		var fullWidth = null;
+		var singleWidth = null;
+		var divToMove = $$('#wrap div')[0];
+		
+		// get width of all images including margin
+		$$('#wrap div img').collect(function(img) {
+			var marginRight = parseInt(img.getStyle('margin-right'));
+			var marginLeft = parseInt(img.getStyle('margin-left'));
+			var width = img.measure('width');
+			fullWidth += marginRight + marginLeft + width;
+			singleWidth = marginRight + marginLeft + width;
+		});
+		
+		// Move Function
+		var direction = (id == 'left') ? singleWidth : -singleWidth;
+		
+		// check for position of div, if end is reached: clone div and add it for endless scrolling
+		new Effect.Move(divToMove, { x:direction });
 	}
-	
-	
 	
 });
 

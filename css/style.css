@@ -2,12 +2,13 @@
 
 
 #scroller {
-	width:500px;
+	width:440px;
 	float:left;
 }
 
 
 #wrap {
+	position:absolute;
 	width:335px;
 	white-space:nowrap;
 	overflow:hidden;
@@ -17,7 +18,9 @@
 
 #wrap img {
 	margin:0 10px;
-}
+}	
+
+	#wrap div { position:relative; }
 
 #left, #right {
 	background:#ddd;
@@ -33,3 +36,4 @@
 #right {
 	float:right;
 }
+
