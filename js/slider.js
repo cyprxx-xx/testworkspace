@@ -42,7 +42,10 @@ var Slider = Class.create({
 		
 		// check for position of div, if end is reached: clone div and add it for endless scrolling
 		new Effect.Move(divToMove, { x:direction });
-	}
-	
+		this.wurstbrot;
+	},
+	wurstbrot:function() {
+		alert('test');
+	}	
 });
 
