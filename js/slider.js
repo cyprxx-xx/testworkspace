@@ -2,15 +2,13 @@ document.observe('dom:loaded', init);
 
 function init() {
 	// Slider init
-	var slide = new Slider('scroller', 'left', 'right', 'linear');
-	//slide.wurstbrot();
+	new Slider('scroller', 'left', 'right', 'linear');
 }
-
 
 /*
  * Slider-Class
- * Last-Upadte: 2011-02-25
- * Version: 0.1
+ * Last-Update: 2011-03-06
+ * Version: 0.1a
  */
 var Slider = Class.create({
 	initialize: function(scroller, left, right, transition) {
@@ -19,36 +17,52 @@ var Slider = Class.create({
 		this.right = right;
 		this.transition = transition;
 		
-		// left and right button observe
-		$(left).observe('click', this.getData);
-		$(right).observe('click', this.getData);
-		
-		this.wurstbrot();
+		this._moveDiv = this.moveDiv;
+		this._cancel = this.cancel;
+		this._observe = this.observeButtons;
+		this.observeButtons();
 	},
-	wurstbrot:function() {
-		alert('test');
-	},	
-	getData: function() {
-		var id = this.id;
+	
+	/* eventhandlers to observe  */
+	observeButtons:function() {
+		$(this.right).observe('click', this.getData.bind(this));
+		$(this.left).observe('click', this.getData.bind(this));
+	},
+	
+	/* get all needed values to move div */
+	getData: function(e) {
+		var id = e.element().id;
 		var fullWidth = null;
 		var singleWidth = null;
 		var divToMove = $$('#wrap div')[0];
 		
-		// get width of all images including margin
+		/* get width of all images including margin */
 		$$('#wrap div img').collect(function(img) {
 			var marginRight = parseInt(img.getStyle('margin-right'));
 			var marginLeft = parseInt(img.getStyle('margin-left'));
 			var width = img.measure('width');
-			fullWidth += marginRight + marginLeft + width;
+			//fullWidth += marginRight + marginLeft + width;    	   /* needed ? */
 			singleWidth = marginRight + marginLeft + width;
 		});
 		
-		// Move Function
 		var direction = (id == 'left') ? singleWidth : -singleWidth;
-		
-		// check for position of div, if end is reached: clone div and add it for endless scrolling
-		new Effect.Move(divToMove, { x:direction });
-		//this.wurstbrot();
+		this._moveDiv(direction, divToMove);
+	},
+	
+	/* remove observers as long as effect is running */
+	cancel:function() {
+		$(this.right).stopObserving('click');
+		$(this.left).stopObserving('click');
+	},
+	
+	/* move div inside #wrap including direction */
+	moveDiv:function(direction, divToMove) {
+		new Effect.Move(divToMove, { 
+			x:direction, 
+			duration:0.6,
+			beforeStart:this._cancel.bind(this),
+			afterFinish:this._observe.bind(this)
+		});
 	}
 });
 

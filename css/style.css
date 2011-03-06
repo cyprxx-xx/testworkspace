@@ -9,18 +9,16 @@
 
 #wrap {
 	position:absolute;
-	width:335px;
+	width:320px;
 	white-space:nowrap;
 	overflow:hidden;
 	float:left;
 	margin-left:55px;
 }
 
-#wrap img {
-	margin:0 10px;
-}	
-
+	#wrap img { margin:0 10px; }	
 	#wrap div { position:relative; }
+
 
 #left, #right {
 	background:#ddd;
