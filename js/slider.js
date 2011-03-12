@@ -29,15 +29,14 @@ var Slider = Class.create({
 	
 	/* elements to observe  */
 	observeButtons:function(id) {
-		
 		$(this.right).observe('click', this.moveDiv.bind(this));
 		$(this.left).observe('click', this.moveDiv.bind(this));
 		
+		/* clone and insert first li */
 		if(id == 'right') {
 			var firstLi = $$('#wrap ul li').first().clone(true);
 			$$('#wrap ul li').first().remove();
-			$$('#wrap ul').first().insert({ bottom:firstLi });
-			$$('#wrap ul').first().setStyle({ left:'0px' });
+			$$('#wrap ul').first().setStyle({ left:'0px' }).insert({ bottom:firstLi });;
 		}
 	},
 	
@@ -60,23 +59,21 @@ var Slider = Class.create({
 		$(this.left).stopObserving('click');
 	},
 	
-	/* move div inside #wrap including direction */
+	/* move ul inside #wrap + direction */
 	moveDiv:function(e) {
 		var id = e.element().id;
-		var divToMove = $$('#wrap ul').first();
+		var moveObj = $$('#wrap ul').first();
 		var direction = (id == 'left') ? this.singleWidth : this.singleWidth * (-1);
 		
-		/* clone and insert li's */
-		var firstLi = $$('#wrap ul li').first().clone(true);
+		/* clone and insert last li */
 		var lastLi = $$('#wrap ul li').last().clone(true);
 		
 		if(id == 'left') {
-			$$('#wrap ul').first().setStyle({ left:-this.singleWidth+'px' });
-			$$('#wrap ul').first().insert({ top:lastLi });
+			$$('#wrap ul').first().setStyle({ left:-this.singleWidth+'px' }).insert({ top:lastLi });
 			$$('#wrap ul li').last().remove();
 		}
 		
-		new Effect.Move(divToMove, { 
+		new Effect.Move(moveObj, { 
 			x:direction, 
 			duration:0.5,
 			beforeStart:this._cancel.bind(this),
