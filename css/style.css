@@ -32,7 +32,8 @@ body { font-family:verdana, sans-serif; }
 		left:0; 
 		top:0;
 	}
-	#wrap ul li { 
+	#wrap ul li {
+		width:140px;
 		float:left; 
 		margin:0 10px;
 		text-align:center;

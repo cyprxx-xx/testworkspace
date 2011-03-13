@@ -49,7 +49,7 @@ var Slider = Class.create({
 		
 		this.singleWidth = marginRight + marginLeft + width;
 		this.fullWidth = this.singleWidth * ($$('#wrap li').size());
-				
+		
 		$$('#wrap ul').first().setStyle({ width:this.fullWidth+'px' });
 	},	
 		
