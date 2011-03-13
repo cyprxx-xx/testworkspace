@@ -36,16 +36,16 @@ var Slider = Class.create({
 		if(id == 'right') {
 			var firstLi = $$('#wrap ul li').first().clone(true);
 			$$('#wrap ul li').first().remove();
-			$$('#wrap ul').first().setStyle({ left:'0px' }).insert({ bottom:firstLi });;
+			$$('#wrap ul').first().setStyle({ left:'0px' }).insert({ bottom:firstLi });
 		}
 	},
 	
 	getData: function() {
-		/* get width of all images + margin */
-		var img = $$('#wrap li').first();
-		var marginRight = parseInt(img.getStyle('margin-right'));
-		var marginLeft = parseInt(img.getStyle('margin-left'));
-		var width = img.measure('width');
+		/* get width of li + margin */
+		var li = $$('#wrap li').first();
+		var marginRight = parseInt(li.getStyle('margin-right'));
+		var marginLeft = parseInt(li.getStyle('margin-left'));
+		var width = li.measure('width');
 		
 		this.singleWidth = marginRight + marginLeft + width;
 		this.fullWidth = this.singleWidth * ($$('#wrap li').size());

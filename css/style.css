@@ -1,6 +1,6 @@
 body { font-family:verdana, sans-serif; }
 
-#scroller {	width:440px; display:inline-block; }
+#scroller {	width:430px; display:inline-block; }
 #scroller:after {
 	content:'.';
 	display:block;
@@ -11,6 +11,10 @@ body { font-family:verdana, sans-serif; }
 }
 * html #scroller { height:1%; }
 
+#center {
+	width:600px;
+	margin:20px auto;
+}
 
 #wrap {
 	position:absolute;
@@ -43,8 +47,10 @@ body { font-family:verdana, sans-serif; }
 	padding:2px 5px;
 	cursor:pointer;
 	margin-top:75px;
+	width:22px;
+	height:28px;
 }
 
-#left {	float:left;}
-#right { float:right;}
+#left {	float:left; background:url(../img/larrow.png);}
+#right { float:right; background:url(../img/rarrow.png);}
 
